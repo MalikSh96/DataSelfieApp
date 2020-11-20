@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Data selfie app</title>
+  <meta name="description" content="standard template">
+  <meta name="Malik">
+</head>
+<body>
+    <script>
+        let lat;
+        let lon;
+        //Allows us to write code
+        if('geolocation' in navigator)
+        {
+            //Geolocations is available
+            console.log('geolocation available');
+            //We geolocate using the below function which takes in a callback function
+            //OBS, see readme.md for more info
+            //position is the param we pass into the arrow function
+            /*navigator.geolocation.getCurrentPosition(position => {
+                console.log(position.coords.latitude, ' and ', position.coords.longitude);
+            });*/
+            navigator.geolocation.getCurrentPosition(async position => {
+                lat = position.coords.latitude;
+                document.getElementById('latitude').textContent = lat;
+                lon = position.coords.longitude;
+                document.getElementById('longitude').textContent = lon;
+                //console.log(position);
+
+                //javascript object
+                const data = {
+                    lat,
+                    lon
+                };
+                const options = {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
+                const response = await fetch('/api', options);
+                const json = await response.json();
+                console.log(json);
+            });
+        }
+        else 
+        {
+            //Geolocation is NOT available
+            console.log('geolocation unavailable');
+        }
+    </script>
+
+    <h1>
+        Data selfie app
+    </h1>
+    <p>
+        Latitude: <span id="latitude">&deg;</span>
+        <br>
+        Longitude: <span id="longitude">&deg;</span>
+    </p>
+</body>
+</html>

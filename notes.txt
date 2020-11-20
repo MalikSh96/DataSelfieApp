@@ -1,0 +1,57 @@
+THE CONTENT OF THIS FILE IS MOVED INTO README.MD, THIS WILL NO LONGER GET UPDATED
+
+Server:
+-A server is an application that runs and listens for requests (people who wants to connect to the server)
+-A server is going to be the central repository of the data of the application
+
+Node:
+-When working with Node, it is easier to look for a node package some of the functionality you are looking for
+and install that package.
+-It works like a library or an add-on.
+-Most node packages depend on other packages and npm is smart enough to know what other packages it
+will need as well (for example when installing Express).
+
+Express:
+-Webapp framework.
+-Express can be used to host static files
+
+Node_modules folder:
+-Is not a folder you would normally manage.
+
+For this application:
+-In this app we will be using Express to create the webserver.
+-Express is a web app framework, and has the functionality we wil need.
+-If I want to use npm for this project I will need package.json.
+-Express will be a part of the dependency of the project.
+-index.js will contain the server code
+-index.html is the file we want to see when we go and try to make a connection
+
+Package.json:
+-Is a special type of file, it is basically the configuration file for your project.
+-This is where all the meta info about the project, what node packages you are using and what
+the project (webapplication) is called
+-npm init --> generates the package.json file.
+-in this file is where you need to make a reference to Express
+
+Package-lock.json:
+-Keeps tracks of dependencies and versions of our packages
+
+We want the server to:
+-Serve webpages (send the information we have such as html, css, js etc to be able to see in the browser)
+
+Geolocation API: https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
+-You will often want to retrieve a user's location information in your web app, for example to plot their
+location on a map, or display personalized information relevant to their location.
+-The Geolocation API allows the user to provide their location to web applications if they so desire.
+-The Geolocation API is accessed via a call to 'navigator.geolocation'.
+-If geolocation is available you can choose to take the next step and geolocate.
+And to do that you make use of the getCurrentPosition() function.
+The getCurrentPosition function requires a callback function that is executed when the position is
+ready to be retrieved.
+-The geolocation.getCurrentPosition is a function that requires a callback and this is going to
+happen asynchronously - thus only when it is READY to grab the latitude and longitude, the function will
+be called
+
+Navigator interface: https://developer.mozilla.org/en-US/docs/Web/API/Navigator
+-The Navigator interface represents the state and the identity of the user agent.
+It allows scripts to query it and to register themselves to carry on some activities.
