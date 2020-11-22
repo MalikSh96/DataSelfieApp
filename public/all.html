@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Data Selfie App</h1>
+        <script>
+            getData();
+            async function getData(){
+                const response = await fetch('/api');
+                const data = await response.json();
+
+                //for each element in our data array
+                for(item of data){
+                    //we are creating html dom elements
+                    const root = document.createElement('div');
+                    const geo = document.createElement('div');
+                    const date = document.createElement('div');
+                    
+                    const dateString = new Date(item.timestamp).toLocaleString();
+                    geo.textContent = `latitude: ${item.latitude}°, longitude: ${item.longitude}°`;
+                    date.textContent = dateString;
+
+                    root.append(geo, date);
+                    //Finally, append the element to the HTML body
+                    document.body.append(root);
+                }
+                console.log(data);
+            }
+        </script>
+    </body>
+</html>

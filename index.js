@@ -17,6 +17,17 @@ app.use(express.json({limit: '1mb'}));
 const database = new Datastore('database.db');
 database.loadDatabase(); //loads the database from the datafile
 
+app.get('/api', (request, response) => {
+    //database.find({}, callback) takes an object, and because we want all data, we leave {} empty, and it also takes a callback with 2 arguments
+    database.find({}, (err, data) => {
+        if(err){
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+});
+
 app.post('/api', (request, response) => {
     console.log('I got a request');
     console.log(request.body);
@@ -33,12 +44,7 @@ app.post('/api', (request, response) => {
     data.timestamp = timestamp;
     database.insert(data);
     //console.log(database);
-    response.json({
-        status: 'success',
-        timestamp: timestamp,
-        latitude: data.lat,
-        longitude: data.lon
-    });
+    response.json(data);
 });
 
 

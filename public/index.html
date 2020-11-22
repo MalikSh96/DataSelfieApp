@@ -7,6 +7,7 @@
   <meta name="Malik">
 </head>
 <body>
+    <form>
     <script>
         let lat;
         let lon;
@@ -51,14 +52,25 @@
             console.log('geolocation unavailable');
         }
     </script>
+    </form>
 
     <h1>
         Data selfie app
     </h1>
+    <script type="text/javascript">
+        //https://stackoverflow.com/questions/899743/insert-one-html-file-in-another-dynamically
+        let changePage = function() {
+        let iframe = document.getElementById("myiframe");  // One of the many ways to select your iframe
+        let url = 'http://localhost:3000/all.html'; //for now url is hardcoded
+        iframe.src = url;
+    }
+    </script>
     <p>
         Latitude: <span id="latitude">&deg;</span>
         <br>
         Longitude: <span id="longitude">&deg;</span>
     </p>
+    <input type="button" onclick="changePage()" value="See all data"/>
+    <iframe id="myiframe"></iframe>
 </body>
 </html>

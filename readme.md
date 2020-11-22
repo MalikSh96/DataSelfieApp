@@ -229,6 +229,72 @@ And the way to save (persist) into the database is by using `database.insert(you
 
 In `database.db` we have an `_id` for each entry saved, and a key aspect of working with a database, is having every record, every entry into the database be associated with a unique key (`_id`), and ***NeDB*** is generating this code for us to be the particular entry's id.
 
+# LESSON 2.5
+# Database Query
+Querying data from the database itself. (using Get)
 
+- We need to look at **routing** again, we need a new route.
+- We will use the `fetch()` function again, for a `Get` request.
+- We need to find functionality in the database system itself **NeDB** that allows you to query the database, to find something. And for this we will use a function called [`find`](https://github.com/louischatriot/nedb#finding-documents)
+
+For our `get` request we for now create a new file called `all.html` which will have a purpose of displaying all data we have from our database.
+
+Ultimately from our client we want to make a `get` request to a route on the server and have that route return all the data from the database.
+
+Below code is our route setup in `index.js`
+```
+app.get('/api', (request, response) => {
+    database.find({}, (err, data) => {
+        if(err){
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+});
+```
+Our `get` request looks like this in `all.html`
+```
+getData();
+async function getData(){
+    const response = await fetch('/api');
+    const data = await response.json();
+
+    //for each element in our data array
+    for(item of data){
+        //we are creating html dom elements
+        const root = document.createElement('div');
+        const geo = document.createElement('div');
+        const date = document.createElement('div');
+                    
+        const dateString = new Date(item.timestamp).toLocaleString();
+        geo.textContent = `latitude: ${item.latitude}°, longitude: ${item.longitude}°`;
+        date.textContent = dateString;
+
+        root.append(geo, date);
+        //Finally, append the element to the HTML body
+        document.body.append(root);
+    }
+    console.log(data);
+}
+```
+[someNode.textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) is used to avoid code injection which could possibly mess with our project, which would be a risk if we were using `innerHTML`, in general to ***"strengthen"*** security.
+
+We are reusing the `/api` route because calling **fetch** with a **get** to the **api** will be handled in a different function in the server itself.
+
+Our `get` **route** looks as such 
+```
+app.get('/api', (request, response) => {
+    //database.find({}, callback) takes an object, and because we want all data, we leave {} empty, and it also takes a callback with 2 arguments
+    database.find({}, (err, data) => {
+        if(err){
+            response.end();
+            return;
+        }
+        response.json(data);
+    });
+});
+```
+[`response.end`](https://www.geeksforgeeks.org/express-js-res-end-function/)
 
 # DataSelfieAppTutorial
