@@ -199,4 +199,36 @@ with some data. And in return in the client file `index.html` you want to receiv
 
 When response comes back after a fetch call, it comes in as a data stream, so it is up to you to specify how you want to read that, and here you
 want to read it as JSON, `const json = await response.json();` handles your response from the server
+
+# LESSON 2.4
+# Saving to a Database
+A database is for persistence, your ability to store information over the long haul, basically saving information.
+
+You can't do this with client-side code alone, there is something called **Local storage**, and **local storage** is a mechanism for your browser itself to store information locally - but the issue with it is
+of you are saving information, when accessing from another client, it won't know the data.
+
+The different clients accross the server needs to be able to share information, and this information needs to be saved at a database that's living on the server.
+
+***You don't need to make your own database nor even keep your database on a server, you can use something called Database-as-a-Service (for example **MongoDB**).***
+
+In this project **NeDB** will be used, it's lightweight, very simple, it's all javascript based, and can be run in **Node**.
+
+Documentation for [NeDB](https://github.com/louischatriot/nedb)
+```
+npm install nedb   # Put latest version in your package.json
+```
+After installing **NeDB** in `index.js` we need to `require` that database that we added (import that node package).
+`const Datastore = require('nedb');` Here we are getting a function that creates a database/datastore
+
+After we have ***required*** our database we will create our database
+`new Datastore('Path to a Filename');`
+-->
+ `const database = new Datastore('database.db');` 
+
+And the way to save (persist) into the database is by using `database.insert(your desired data);` and the data gets stored as JSON
+
+In `database.db` we have an `_id` for each entry saved, and a key aspect of working with a database, is having every record, every entry into the database be associated with a unique key (`_id`), and ***NeDB*** is generating this code for us to be the particular entry's id.
+
+
+
 # DataSelfieAppTutorial
