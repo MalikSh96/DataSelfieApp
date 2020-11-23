@@ -37,7 +37,9 @@ app.post('/api', (request, response) => {
     const data = {
         latitude: request.body.lat,
         longitude: request.body.lon,
-        timestamp: request.body.timestamp
+        timestamp: request.body.timestamp,
+        mood: request.body.mood,
+        image: request.body.image64
     }
     //const data = request.body;
     const timestamp = Date.now();
@@ -54,7 +56,5 @@ app.post('/api', (request, response) => {
 
 /*Test code
 console.log("hello");
-
 const x = 5;
-
 console.log(x + 2);*/

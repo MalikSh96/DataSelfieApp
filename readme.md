@@ -297,4 +297,15 @@ app.get('/api', (request, response) => {
 ```
 [`response.end`](https://www.geeksforgeeks.org/express-js-res-end-function/)
 
+# LESSON 2.6
+# Saving Images and Base64 encoding
+Integrating [**p5.js**](https://p5js.org/get-started/)
+
+***p5.js CDN*** or ***p5.js Content Delivery Network***, is a hosting service that will deliver you content, and the content we want is the **p5.js** library.
+
+The p5 library have several components to it, and for this project we will be using `p5.min.js` because we won't need all from the p5.js and just the minimum of it.
+
+[**Base64**](https://en.wikipedia.org/wiki/Base64) encoding is a method to take some binary data, in our case the image, all the colors of the pixels of the image and convert it to ASCII data, meaning a string of text. So it will be repackaging the same data in a format that's convenient to pass around - In short we will send the webcam image from the client to the server.
+The easy way to do that is, as mentioned, by sending a string of text to the server.
+
 # DataSelfieAppTutorial
