@@ -309,3 +309,17 @@ The p5 library have several components to it, and for this project we will be us
 The easy way to do that is, as mentioned, by sending a string of text to the server.
 
 # DataSelfieAppTutorial
+
+# GetCurrentWeatherTutorial
+
+# LESSON 3.1
+# API calls from Node.js
+We will use an external weather API (***[OpenWeatherMap](https://openweathermap.org/)***).
+
+Most of the functionality that we need for this weather app, we have already implemented in our **DatSelfieApp**, so some baseline of code will be used from there.
+
+CORS stands for Cross-Origin Resource Sharing, and it can be enabled or disabled - in short it is whether or not sharing of resources is allowed.
+
+The web fetch api, `fetch`, is part of the client side browser API, if we want to use it from within Node, we need to install a Node package for that `npm install node-fetch`.
+
+`http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={API key}` is the url we are using because we are using our current coordinates.

@@ -4,27 +4,29 @@ let lon;
 if ('geolocation' in navigator) {
   console.log('geolocation available');
   navigator.geolocation.getCurrentPosition(async position => {
-    //let weather;
+    let lat;
+    let lon;
+    let weather;
+    //console.log(weather);
     lat = position.coords.latitude;
     lon = position.coords.longitude;
     document.getElementById('latitude').textContent = lat.toFixed(2);
     document.getElementById('longitude').textContent = lon.toFixed(2);
 
     const api_key = 'd66df24d7440d3bd4123c80a3edc63f9';
-    const api_url = `/weather/lat=${lat}&lon=${lon}&appid=${api_key}`;
+    const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     const response = await fetch(api_url);
     const json = await response.json();
-    console.log(json);
+    weatherDescription = json.weather;
+    weatherTemperature = json.main;
+    document.getElementById('summary').textContent = weatherDescription[0].description;
+    document.getElementById('temp').textContent = weatherTemperature.temp;
+    //console.log(json);
 
-    //weather = json.weather.currently;
-    //air = json.air_quality.results[0].measurements[0];
-    //document.getElementById('summary').textContent = weather.summary;
-    //document.getElementById('temp').textContent = weather.temperature;*/
-
-    /*const data = { 
-      lat, 
-      lon, 
-      weather 
+    const data = {
+      lat,
+      lon,
+      weather
     };
     const options = {
       method: 'POST',
@@ -35,12 +37,13 @@ if ('geolocation' in navigator) {
     };
     const db_response = await fetch('/api', options);
     const db_json = await db_response.json();
-    console.log(db_json);*/
+    console.log(db_json);
   });
 } else {
   console.log('geolocation not available');
 }
 
+//Below simply displays (gets) position
 const button = document.getElementById('checkin');
 button.addEventListener('click', async event => {
   const data = {

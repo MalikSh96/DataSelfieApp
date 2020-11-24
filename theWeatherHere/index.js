@@ -33,18 +33,31 @@ app.post('/api', (request, response) => {
   response.json(data);
 });
 
-app.get('/weather/:latlon', async (request, response) => {
+//:latlon in our url is route parameters (latitude and longitude)
+app.get('http://api.openweathermap.org/data/2.5/weather?:latlon', async (request, response) => {
   console.log(request.params);
+  //Inside our request object is a property called params
+  //Inside the params object are all of the parameters, in our case just one parameter, something called latlon
   const latlon = request.params.latlon.split(',');
   console.log(latlon);
   const lat = latlon[0]; //latitude is index 0
   const lon = latlon[1]; //longitude is index 1
+  /*
+  In theory, as long as we send in, as the route parameter the latitude and longitude 
+  separated by a comma, we can pull it out of request.params, split it by comma into an array and 
+  put them in each of our variables above.
+  */
   console.log(lat, lon);
   const api_key = 'd66df24d7440d3bd4123c80a3edc63f9';
-  const api_url = `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}`;
-  const fetch_response = await fetch(api_url);
-  const json = await fetch_response.json();
-  response.json(json);
+  const api_url = `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
+  const weather_response = await fetch(api_url);
+  const weather_data = await weather_response.json();
+
+  const data = {
+    weather: weather_data
+  }
+
+  response.json(data);
   /*
   We are making the API call from within here
   and then sending it back, this is what is known
@@ -52,22 +65,3 @@ app.get('/weather/:latlon', async (request, response) => {
   open weather map
   */
 });
-
-
-/*app.get('/weather/:latlon', async (request, response) => {
-  console.log(request.params);
-  const latlon = request.params.latlon.split(',');
-  console.log(latlon);
-  const lat = latlon[0];
-  const lon = latlon[1];
-  console.log(lat, lon);
-  const api_key = process.env.API_KEY;
-  const weather_url = `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}`;
-  const weather_response = await fetch(weather_url);
-  const weather_data = await weather_response.json();
-
-  const data = {
-    weather: weather_data
-  };
-  response.json(data);
-});*/

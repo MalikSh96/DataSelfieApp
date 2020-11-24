@@ -16,8 +16,8 @@ async function getData() {
   for (item of data) {
     const marker = L.marker([item.lat, item.lon]).addTo(mymap);
     let txt = `The weather here at ${item.lat}&deg;,
-    ${item.lon}&deg; is ${item.weather.summary} with
-    a temperature of ${item.weather.temperature}&deg; C.`;
+    ${item.lon}&deg; is ${item.weather[0].description} with
+    a temperature of ${item.main.temp}&deg; C.`;
 
     marker.bindPopup(txt);
   }
