@@ -17,6 +17,7 @@ async function getData() {
     geo.textContent = `latitude: ${item.latitude}°, longitude: ${item.longitude}°`;
     date.textContent = dateString;
     image.src = item.image; //puts the base64 encoded data itself by using the .src attribute
+    image.alt = "Malik taking selfies"; //this is used for when using Web Accessibility Evaluation tool
     //console.log("What is the image? " + image);
     //break;
     if (image.src == 0) {
