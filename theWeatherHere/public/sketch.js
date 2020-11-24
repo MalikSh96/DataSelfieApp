@@ -17,8 +17,8 @@ if ('geolocation' in navigator) {
     const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     const response = await fetch(api_url);
     const json = await response.json();
-    weatherDescription = json.weather;
-    weatherTemperature = json.main;
+    const weatherDescription = json.weather;
+    const weatherTemperature = json.main;
     document.getElementById('summary').textContent = weatherDescription[0].description;
     document.getElementById('temp').textContent = weatherTemperature.temp;
     //console.log(json);
@@ -26,7 +26,8 @@ if ('geolocation' in navigator) {
     const data = {
       lat,
       lon,
-      weather
+      weatherDescription,
+      weatherTemperature
     };
     const options = {
       method: 'POST',
