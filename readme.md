@@ -314,9 +314,9 @@ The easy way to do that is, as mentioned, by sending a string of text to the ser
 
 # LESSON 3.1
 # API calls from Node.js
-We will use an external weather API (***[OpenWeatherMap](https://openweathermap.org/)***).
+We will use an external weather API (**[OpenWeatherMap](https://openweathermap.org/)**).
 
-Most of the functionality that we need for this weather app, we have already implemented in our **DatSelfieApp**, so some baseline of code will be used from there.
+Most of the functionality that we need for this weather app, we have already implemented in our **DataSelfieApp**, so some baseline of code will be used from there.
 
 CORS stands for Cross-Origin Resource Sharing, and it can be enabled or disabled - in short it is whether or not sharing of resources is allowed.
 
@@ -339,3 +339,5 @@ If you encounter an issue just use [this](https://api.openaq.org/v1/latest?coord
 **pm** data stands for **particulate matter** data (particle pollution).
 
 Another ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) **issue** with using OpenAQ is that the data isn't necessarily **real-time** data.
+
+**As things stands** I will be trying to use another open air quality API such as **[AirVisual]**(https://www.iqair.com/dashboard), but this will be a ***work in progress***.
