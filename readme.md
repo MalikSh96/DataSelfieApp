@@ -340,4 +340,4 @@ If you encounter an issue just use [this](https://api.openaq.org/v1/latest?coord
 
 Another ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) **issue** with using OpenAQ is that the data isn't necessarily **real-time** data.
 
-**As things stands** I will be trying to use another open air quality API such as **[AirVisual]**(https://www.iqair.com/dashboard), but this will be a ***work in progress***.
+**As things stands** I will be trying to use another open air quality API such as [**AirVisual**](https://www.iqair.com/dashboard), but this will be a ***work in progress***.
