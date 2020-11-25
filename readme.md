@@ -323,3 +323,19 @@ CORS stands for Cross-Origin Resource Sharing, and it can be enabled or disabled
 The web fetch api, `fetch`, is part of the client side browser API, if we want to use it from within Node, we need to install a Node package for that `npm install node-fetch`.
 
 `http://api.openweathermap.org/data/2.5/forecast?id=524901&appid={API key}` is the url we are using because we are using our current coordinates.
+
+# LESSON 3.2
+# Open Air Quality API in Node.js
+**Purpose**: Working with multiple API's within one application, and for this we will use [OpenAQ](https://openaq.org/#/?_k=3x7g40).
+
+**OpenAQ** is an open data, open source project that aggregates a lot of different air quality readings from many different sources.
+
+[API](https://docs.openaq.org/) is an api with a variety of different endpoints for you to request that air quality information.
+
+The ***!#[f03c15]issue*** `#f03c15` with using OpenAQ, is that you can encounter no results at all, because OpenAQ does not have any information regarding specific locations.
+
+If you encounter an issue just use [this](https://api.openaq.org/v1/latest?coordinates=40.73,-73.99) hardcoded url which gives you the OpenAQ information in New York.
+
+**pm** data stands for **particulate matter** data (particle pollution).
+
+Another ***!#[f03c15]issue*** `#f03c15` with using OpenAQ is that the data isn't necessarily **real-time** data.
