@@ -13,7 +13,7 @@ if ('geolocation' in navigator) {
     document.getElementById('latitude').textContent = lat.toFixed(2);
     document.getElementById('longitude').textContent = lon.toFixed(2);
 
-    const api_key = 'My API key';
+    const api_key = 'My API Key';
     const api_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
     const response = await fetch(api_url);
     const json = await response.json();
