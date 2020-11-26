@@ -341,3 +341,13 @@ If you encounter an issue just use [this](https://api.openaq.org/v1/latest?coord
 Another ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) **issue** with using OpenAQ is that the data isn't necessarily **real-time** data.
 
 **As things stands** I will be trying to use another open air quality API such as [**AirVisual**](https://www.iqair.com/dashboard), but this will be a ***work in progress***.
+
+# LESSON 3.3
+# Mapping Database Entries with Leaflet.js
+Every time the ***check in*** button gets pressed we want to save all of the information into a database, so that we can go onto a **View Checkins** page and view all of the records ever saved plotted on a map.
+
+[Leaflet.js](https://leafletjs.com/) is referenced under `public` -> `checkins` -> `index.html` where I make use of a script.
+
+In `logs.js` we have a little bit of code to specify the tiles from OpenStreetMap and place the map with a zoom level one, latitude and longitude zero, zero, right there on the page.
+
+The data from the database gets loaded with the `getData()` (`logs.js`) function by making a fetch call to the API endpoint.

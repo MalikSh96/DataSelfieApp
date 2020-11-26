@@ -48,13 +48,22 @@ app.get('http://api.openweathermap.org/data/2.5/weather?:latlon', async (request
   put them in each of our variables above.
   */
   console.log(lat, lon);
+  //Open Weather Map
   const api_key = 'My API Key'; //My api key
   const api_url = `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
   const weather_response = await fetch(api_url);
   const weather_data = await weather_response.json();
 
+
+  //Air Quality
+  //for now hardcoded until I get my own access to AirVisual
+  const aq_url = `https://api.openaq.org/v1/latest?coordinates=40.73,-73.99`; //New York coordinates
+  const aq_response = await fetch(aq_url);
+  const aq_data = await aq_response.json();
+
   const data = {
-    weather: weather_data
+    weather: weather_data,
+    air_quality: aq_data
   }
 
   response.json(data);
