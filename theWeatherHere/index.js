@@ -2,7 +2,7 @@ const { request } = require('express');
 const express = require('express');
 const Datastore = require('nedb');
 const fetch = require('node-fetch');
-require('dotenv').config();
+require('dotenv').config(); //.env file
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -49,15 +49,16 @@ app.get('http://api.openweathermap.org/data/2.5/weather?:latlon', async (request
   */
   console.log(lat, lon);
   //Open Weather Map
-  const api_key = 'My API Key'; //My api key
+  const api_key = process.env.OPENWEATHERMAP_API_KEY; //My Open Weather Map api key
   const api_url = `api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
   const weather_response = await fetch(api_url);
   const weather_data = await weather_response.json();
 
 
   //Air Quality
-  //for now hardcoded until I get my own access to AirVisual
-  const aq_url = `https://api.openaq.org/v1/latest?coordinates=40.73,-73.99`; //New York coordinates
+  //Using Weatherbit.io
+  const weather_api_key = process.env.WEATHERBIT_API_KEY; //My weatherbit api key
+  const aq_url = `https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lon}&key=${weather_api_key}`; 
   const aq_response = await fetch(aq_url);
   const aq_data = await aq_response.json();
 

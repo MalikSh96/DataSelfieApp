@@ -1,3 +1,5 @@
+import { api_keys } from './keys.js';
+
 // Geo Locate
 let lat;
 let lon;
@@ -16,7 +18,7 @@ if ('geolocation' in navigator) {
       document.getElementById('latitude').textContent = lat.toFixed(2);
       document.getElementById('longitude').textContent = lon.toFixed(2);
 
-      const api_key = 'My API Key';
+      const api_key = api_keys.OpenWeatherMap;
       const weather_url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api_key}&units=metric`;
       const response = await fetch(weather_url);
       const weather_data = await response.json();
@@ -27,14 +29,14 @@ if ('geolocation' in navigator) {
       //console.log(weather_data);
 
       //aq = air quality
-      const aq_url = `https://api.openaq.org/v1/latest?coordinates=${lat},${lon}`;
+      const weather_api_key = api_keys.Weatherbit;
+      const aq_url = `https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lon}&key=${weather_api_key}`;
       const aq_response = await fetch(aq_url);
       const aq_data = await aq_response.json();
-      air = aq_data.results[0].measurements[0]; //this can return empty which in return gives an undefined result
-      document.getElementById('aq_parameter').textContent = air.parameter;
-      document.getElementById('aq_value').textContent = air.value;
-      document.getElementById('aq_units').textContent = air.unit;
-      document.getElementById('aq_date').textContent = air.lastUpdated;
+      
+      air = aq_data; 
+      document.getElementById('aq_value').textContent = air.data[0].pm25; //Concentration of particulate matter < 2.5 microns (µg/m³)
+      document.getElementById('aq_pollen_type').textContent = air.data[0].predominant_pollen_type; //Predominant pollen type (Trees/Weeds/Molds/Grasses)
     }
     catch (error) {
       console.error(error);

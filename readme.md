@@ -342,6 +342,11 @@ Another ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) **issue*
 
 **As things stands** I will be trying to use another open air quality API such as [**AirVisual**](https://www.iqair.com/dashboard), but this will be a ***work in progress***.
 
+**OBS** Since both OpenAQ and AirVisual is not working (OpenAQ doesn't provide for all locations and I am still waiting for an API key from AirVisual) - We will instead be using [**Weatherbit**](https://www.weatherbit.io/api/airquality-current).
+
+With **Weatherbit** I get provided an API key which I then make use of in the following endpoint 
+`https://api.weatherbit.io/v2.0/current/airquality?lat=${lat}&lon=${lon}&key=${weather_api_key}`
+
 # LESSON 3.3
 # Mapping Database Entries with Leaflet.js
 Every time the ***check in*** button gets pressed we want to save all of the information into a database, so that we can go onto a **View Checkins** page and view all of the records ever saved plotted on a map.
@@ -351,3 +356,53 @@ Every time the ***check in*** button gets pressed we want to save all of the inf
 In `logs.js` we have a little bit of code to specify the tiles from OpenStreetMap and place the map with a zoom level one, latitude and longitude zero, zero, right there on the page.
 
 The data from the database gets loaded with the `getData()` (`logs.js`) function by making a fetch call to the API endpoint.
+
+# LESSON 3.4 
+# Hiding API Keys with Environment Variables (dotenv)
+We want to look at one important thing here, and that's how to stop our API keys from just sitting right there exposed in our code, if we want to make our porject a public source project, ie. exposed to the public.
+
+And the way we will handle this is with an ***environment variable***, and an environment variable is a variable.
+The thing is we don't want this specific ***"varibale"*** in our code but rather we want it stored in the environment, we want it to be something that is set within the operating system or whatever framwork or system we are using to run software itself.
+
+For all this we will be using a ***node*** package called [`dotenv`](https://www.npmjs.com/package/dotenv) -> `npm install dotenv`.
+Dotenv is a zero-dependency module that loads environment variables from a `.env` file into `process.env`.
+
+It's a convention for environment variables to be stored either in a **dotenv** file or through some other mechanism based on whatever server you're using, but **not** to be published when the code is published.
+
+Since this project is published to **GitHub** with some omitted files, such as our `.env` file, you can make use of `.env_sample` to understand what our `.env` file contains and from there make your own changes and refactoring the `.env_sample` file into `.env` and replace it with your own ***api keys***.
+
+**OBS** Since we can't use ***dotenv*** with client side code, we can't make use of the environment variables inside our `.env` file.
+And since we also make use of our API keys in our client side code `sketch.js` we need to solve the issue of just having our API keys being visible inside `sketch.js`. To solve this issue we make use of **modules**, in short we split our coding up into small packages and then reference them different places in different coding coding parts, or:
+***A module is just a file. One script is one module. As simple as that.***
+***Modules can load each other and use special directives export and import to interchange functionality, call functions of one module from another one***
+
+***- **export** keyword labels variables and functions that should be accessible from outside the current module.*** 
+***- **import** allows the import of functionality from other modules.***
+
+We have created a file `keys.js` where we create an object which holds our API keys, and in it we export our `api_keys` object which contains our needed variables, `export {api_keys}`. 
+```
+const api_keys = {
+    OpenWeatherMap: 'MY OPENWEATHERMAP API KEY',
+    Weatherbit: 'MY WEATHERBIT API KEY'//,
+    //ENV: 'api_keys'
+};
+
+export {api_keys};
+```
+Inside our `sketch.js` file we then make a call to import our `keys.js` file using the following: 
+`import { api_keys } from './keys.js';`
+The import directive loads the module by path `./keys.js` relative to the current file, and assigns exported object `api_keys` to the corresponding variable.
+Where we specifically asks it to import our `{api_keys}` and by such we can make a reference to to our API keys as illustrated also in `sketch.js`
+
+```
+const api_key = api_keys.OpenWeatherMap;
+
+const weather_api_key = api_keys.Weatherbit;
+```
+And since modules support special keywords and features, we must tell the browser that a script should be treated as a module, by using the attribute `<script type="module">`
+In `public/index.html` -> `<script src="sketch.js" type="module"></script>`
+
+Links used:
+- [Modules](https://javascript.info/modules-intro)
+- [GuideModules](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules)
+- When import doesn't [work](https://stackoverflow.com/questions/37624819/es2015-import-doesnt-work-even-at-top-level-in-firefox) - even at top level
