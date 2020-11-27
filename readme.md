@@ -391,7 +391,9 @@ const api_keys = {
 export {api_keys};
 ```
 Inside our `sketch.js` file we then make a call to import our `keys.js` file using the following: 
-`import { api_keys } from './keys.js';`
+
+`import { api_keys } from './keys.js';`.
+
 The import directive loads the module by path `./keys.js` relative to the current file, and assigns exported object `api_keys` to the corresponding variable.
 Where we specifically asks it to import our `{api_keys}` and by such we can make a reference to to our API keys as illustrated also in `sketch.js`
 
